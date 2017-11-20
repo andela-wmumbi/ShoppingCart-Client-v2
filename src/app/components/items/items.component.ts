@@ -8,7 +8,7 @@ import { ItemsService } from '../../services/items.service';
   styleUrls: ['./items.component.css']
 })
 export class ItemsComponent implements OnInit {
-  items: any = {};
+  items: any = [];
   constructor(
     private itemsService: ItemsService
   ) { }
@@ -17,7 +17,5 @@ export class ItemsComponent implements OnInit {
     this.itemsService.getItems()
       .toPromise()
       .then(res => this.items = res);
-
-    console.log(this.items);
   }
 }
