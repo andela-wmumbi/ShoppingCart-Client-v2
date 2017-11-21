@@ -6,11 +6,23 @@ import { ItemsComponent } from './components/items/items.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { ItemsService } from './services/items.service';
 import { AppRouteModule } from './app-route.module';
+import { LoginComponent } from './login/login.component';
+import { SocialLoginModule, AuthServiceConfig } from 'angular4-social-login';
+import { GoogleLoginProvider } from 'angular4-social-login';
+
+const config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('580834220925-ceofkqhqhep1lckuanoagkpg8ngjfkhn.apps.googleusercontent.com')
+  }
+]);
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ItemsComponent
+    ItemsComponent,
+    LoginComponent
   ],
   exports: [
     ItemsComponent,
@@ -19,8 +31,11 @@ import { AppRouteModule } from './app-route.module';
     BrowserModule,
     HttpModule,
     AppRouteModule,
+    SocialLoginModule.initialize(config)
   ],
-  providers: [ItemsService],
+  providers: [
+    ItemsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
