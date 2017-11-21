@@ -1,19 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { environment } from '../../environments/environment';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Rx';
 
 @Injectable()
-export class ItemsService {
-  items: any = {};
+export class ItemdetailsService {
   private apiUrl: string = environment.apiUrl;
   constructor(private http: Http) { }
-
-  getItems(): Observable<any> {
+  getItem(id: number) {
     return this.http
-      .get(`${this.apiUrl}/items`)
+      .get(`${this.apiUrl}/items/${id}`)
       .map((res: Response) => res.json())
       .catch(error => Observable.throw(error.json()));
   }

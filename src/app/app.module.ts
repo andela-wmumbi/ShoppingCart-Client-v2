@@ -9,6 +9,8 @@ import { AppRouteModule } from './app-route.module';
 import { LoginComponent } from './login/login.component';
 import { SocialLoginModule, AuthServiceConfig } from 'angular4-social-login';
 import { GoogleLoginProvider } from 'angular4-social-login';
+import { ItemdetailsComponent } from './itemdetails/itemdetails.component';
+import { ItemdetailsService } from './services/itemdetails.service';
 
 const config = new AuthServiceConfig([
   {
@@ -22,7 +24,8 @@ const config = new AuthServiceConfig([
     AppComponent,
     HeaderComponent,
     ItemsComponent,
-    LoginComponent
+    LoginComponent,
+    ItemdetailsComponent,
   ],
   exports: [
     ItemsComponent,
@@ -34,7 +37,8 @@ const config = new AuthServiceConfig([
     SocialLoginModule.initialize(config)
   ],
   providers: [
-    ItemsService
+    ItemsService,
+    ItemdetailsService,
   ],
   bootstrap: [AppComponent]
 })
