@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ItemdetailsService } from '../services/itemdetails.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-itemdetails',
@@ -8,13 +9,21 @@ import { ItemdetailsService } from '../services/itemdetails.service';
   styleUrls: ['./itemdetails.component.css']
 })
 export class ItemdetailsComponent implements OnInit {
+  form: FormGroup;
   itemId: number;
   item: any = [];
+  data: {};
+  cart: any = [];
   constructor(
     private route: ActivatedRoute,
     private itemservice: ItemdetailsService,
+    private formBuilder: FormBuilder,
   ) {
     this.itemId = +this.route.snapshot.params['id'];
+    this.form = this.formBuilder.group({
+      quantity: []
+    });
+    this.data = { id: '', quantity: '' };
   }
 
   ngOnInit() {
@@ -26,5 +35,15 @@ export class ItemdetailsComponent implements OnInit {
       .getItem(id)
       .toPromise()
       .then(res => this.item = res);
+  }
+
+  addItem(form) {
+    this.data['id'] = this.itemId;
+    this.data['quantity'] = form.value.quantity;
+
+    this.itemservice
+      .addItem(this.data)
+      .toPromise()
+      .then();
   }
 }
