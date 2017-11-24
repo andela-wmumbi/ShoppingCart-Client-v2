@@ -16,3 +16,8 @@
     border-left: 1px solid black;
     height: 500px;
 }
+
+.row {
+    float: left;
+    margin: 5% 10px;
+}

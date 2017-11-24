@@ -17,4 +17,11 @@ export class ItemsService {
       .map((res: Response) => res.json())
       .catch(error => Observable.throw(error.json()));
   }
+
+  addItem(data): Observable<any> {
+    return this.http
+      .post(`${this.apiUrl}/items`, data)
+      .map((res: Response) => res.json())
+      .catch(error => Observable.throw(error.json()));
+  }
 }

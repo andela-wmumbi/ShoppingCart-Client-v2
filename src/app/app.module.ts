@@ -11,6 +11,7 @@ import { SocialLoginModule, AuthServiceConfig } from 'angular4-social-login';
 import { GoogleLoginProvider } from 'angular4-social-login';
 import { ItemdetailsComponent } from './itemdetails/itemdetails.component';
 import { ItemdetailsService } from './services/itemdetails.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const config = new AuthServiceConfig([
   {
@@ -34,7 +35,9 @@ const config = new AuthServiceConfig([
     BrowserModule,
     HttpModule,
     AppRouteModule,
-    SocialLoginModule.initialize(config)
+    SocialLoginModule.initialize(config),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     ItemsService,

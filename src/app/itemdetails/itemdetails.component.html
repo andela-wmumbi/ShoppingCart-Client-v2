@@ -10,7 +10,10 @@
         <p>Price: ${{ item.price }}</p>
       </div>
       <div class="card-action">
-        <button type="submit" name="cart">Add to cart</button>
+        <form [formGroup]="form" (ngSubmit)="addItem(form)">
+          <button type="submit" name="cart">Add to cart</button>
+          <input type="number" formControlName="quantity" min="1" max="{{ item.stock }}" value="1" />
+        </form>
       </div>
     </div>
   </div>
