@@ -37,7 +37,7 @@ const config = new AuthServiceConfig([
     AppRouteModule,
     SocialLoginModule.initialize(config),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     ItemsService,
