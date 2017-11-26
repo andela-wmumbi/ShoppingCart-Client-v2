@@ -14,7 +14,7 @@ export class AppComponent {
   ) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        if (event.url === '/login') {
+        if (event.url === '/' || (event.url === '/logout')) {
           this.showNavBar = false;
         }
       }

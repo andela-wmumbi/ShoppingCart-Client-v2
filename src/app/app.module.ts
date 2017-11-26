@@ -1,24 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { AppComponent } from './app.component';
-import { ItemsComponent } from './components/items/items.component';
-import { HeaderComponent } from './pages/header/header.component';
-import { ItemsService } from './services/items.service';
 import { AppRouteModule } from './app-route.module';
-import { LoginComponent } from './login/login.component';
 import { SocialLoginModule, AuthServiceConfig } from 'angular4-social-login';
 import { GoogleLoginProvider } from 'angular4-social-login';
-import { ItemdetailsComponent } from './itemdetails/itemdetails.component';
-import { ItemdetailsService } from './services/itemdetails.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { config } from '../environments/environment';
 
-const config = new AuthServiceConfig([
-  {
-    id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('580834220925-ceofkqhqhep1lckuanoagkpg8ngjfkhn.apps.googleusercontent.com')
-  }
-]);
+import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { ItemsComponent } from './components/items/items.component';
+import { HeaderComponent } from './pages/header/header.component';
+import { ItemdetailsComponent } from './itemdetails/itemdetails.component';
+
+import { ItemdetailsService } from './services/itemdetails.service';
+import { ItemsService } from './services/items.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -42,6 +39,7 @@ const config = new AuthServiceConfig([
   providers: [
     ItemsService,
     ItemdetailsService,
+    UserService,
   ],
   bootstrap: [AppComponent]
 })
