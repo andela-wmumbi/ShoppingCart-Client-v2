@@ -12,10 +12,13 @@ import { LoginComponent } from './login/login.component';
 import { ItemsComponent } from './components/items/items.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { ItemdetailsComponent } from './itemdetails/itemdetails.component';
+import { CartComponent } from './cart/cart.component';
 
 import { ItemdetailsService } from './services/itemdetails.service';
 import { ItemsService } from './services/items.service';
 import { UserService } from './services/user.service';
+import { CartService } from './services/cart.service';
+
 
 @NgModule({
   declarations: [
@@ -24,6 +27,7 @@ import { UserService } from './services/user.service';
     ItemsComponent,
     LoginComponent,
     ItemdetailsComponent,
+    CartComponent,
   ],
   exports: [
     ItemsComponent,
@@ -40,6 +44,7 @@ import { UserService } from './services/user.service';
     ItemsService,
     ItemdetailsService,
     UserService,
+    CartService,
   ],
   bootstrap: [AppComponent]
 })

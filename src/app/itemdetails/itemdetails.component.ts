@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ItemdetailsService } from '../services/itemdetails.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -14,10 +14,12 @@ export class ItemdetailsComponent implements OnInit {
   item: any = [];
   data: {};
   cart: any = [];
+  snackBarConfig: any;
   constructor(
     private route: ActivatedRoute,
     private itemservice: ItemdetailsService,
     private formBuilder: FormBuilder,
+    private router: Router,
   ) {
     this.itemId = +this.route.snapshot.params['id'];
     this.form = this.formBuilder.group({
@@ -43,6 +45,8 @@ export class ItemdetailsComponent implements OnInit {
     this.itemservice
       .addItem(this.data)
       .toPromise()
-      .then();
+      .then(() => {
+        this.router.navigate(['/dashboard']);
+      });
   }
 }
