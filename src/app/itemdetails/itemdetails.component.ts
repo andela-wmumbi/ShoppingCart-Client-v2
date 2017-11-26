@@ -40,7 +40,6 @@ export class ItemdetailsComponent implements OnInit {
   addItem(form) {
     this.data['id'] = this.itemId;
     this.data['quantity'] = form.value.quantity;
-
     this.itemservice
       .addItem(this.data)
       .toPromise()

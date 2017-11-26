@@ -11,8 +11,8 @@
       </div>
       <div class="card-action">
         <form [formGroup]="form" (ngSubmit)="addItem(form)">
-          <button type="submit" name="cart">Add to cart</button>
           <input type="number" formControlName="quantity" min="1" max="{{ item.stock }}" value="1" />
+          <button type="submit" name="cart">Add to cart</button>
         </form>
       </div>
     </div>
