@@ -45,7 +45,16 @@ export class ItemdetailsComponent implements OnInit {
     this.itemservice
       .addItem(this.data)
       .toPromise()
-      .then(() => {
+      .then((res) => {
+        const key = Object.keys(res).toString();
+        const value = res[key];
+        const cart = JSON.parse(sessionStorage.getItem('cart'));
+        if (cart) {
+          cart[key] = value;
+          sessionStorage.setItem('cart', JSON.stringify(cart));
+        } else {
+          sessionStorage.setItem('cart', JSON.stringify(res));
+        }
         this.router.navigate(['/dashboard']);
       });
   }

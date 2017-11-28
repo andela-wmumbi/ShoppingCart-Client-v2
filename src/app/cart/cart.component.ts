@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 
 import { CartService } from '../services/cart.service';
@@ -12,30 +14,58 @@ import { CartService } from '../services/cart.service';
 })
 export class CartComponent implements OnInit {
   private apiUrl: string = environment.apiUrl;
-  item: any = [];
+  form: FormGroup;
+  cart: any = [];
+  itemId: number;
+  itemDetails: any = [];
+  itemQuantities: any = [];
   constructor(
     private http: Http,
+    private router: Router,
     private cartservice: CartService,
-  ) { }
+    private formBuilder: FormBuilder,
+  ) {
+    this.form = this.formBuilder.group({
+      itemId: '',
+    });
+  }
 
   ngOnInit() {
-    this.getItems();
+    this.getItemDetails();
   }
 
-  getItems() {
-    this.cartservice
-      .getItems()
-      .toPromise()
-      .then(res => this.item = res)
-      .then(() => {
-          this.getItemDetails();
-        });
-  }
+  // getItems() {
+  //   this.cartservice
+  //     .getItems()
+  //     .toPromise()
+  //     .then(res => this.cart = res)
+  //     .then((res) => {
+  //       console.log(res);
+  //       this.getItemDetails();
+  //     });
+  // }
 
   getItemDetails() {
-    const itemKeys = this.item.keys();
-    console.log(itemKeys);
+    const cart = JSON.parse(sessionStorage.getItem('cart'));
+    let that = this;
+    const vals = Object.keys(cart).map(function (key) {
+      that.itemQuantities.push(cart[key]);
+    });
+    this.cartservice
+      .getItemDetails(Object.keys(cart))
+      .toPromise()
+      .then(res => this.itemDetails = res);
   }
 
-
+  deleteItem(id: number) {
+    const cart = JSON.parse(sessionStorage.getItem('cart'));
+    console.log(cart);
+    // this.cartservice
+    //   .deleteItem(id)
+    //   .toPromise()
+    //   .then(res => this.cart = res)
+    //   .then(() => {
+    //     this.router.navigate(['/cartview']);
+    //   });
+  }
 }
