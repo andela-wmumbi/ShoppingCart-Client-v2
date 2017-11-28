@@ -18,6 +18,20 @@ export class CartService implements OnInit {
   getItems(): Observable<any> {
     return this.http
       .get(`${this.apiUrl}/cart`)
+      .map((cart: Response) => cart.json())
+      .catch(error => Observable.throw(error.json()));
+  }
+
+  getItemDetails(arrayIds): Observable<any> {
+    return this.http
+      .get(`${this.apiUrl}/items/${arrayIds}`)
+      .map((res: Response) => res.json())
+      .catch(error => Observable.throw(error.json()));
+  }
+
+  deleteItem(id): Observable<any> {
+    return this.http
+      .delete(`${this.apiUrl}/cart/${id}`)
       .map((res: Response) => res.json())
       .catch(error => Observable.throw(error.json()));
   }
